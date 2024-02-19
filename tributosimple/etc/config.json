@@ -1,0 +1,40 @@
+{
+  "kafka": {
+    "consumer": {
+      "bootstrap_servers": ["anfler.kafka1:29092"],
+      "value_deserializer": "lambda x: json.loads(x)",
+      "consumer_timeout_ms": 5000,
+      "max_poll_records": 5,
+      "enable_auto_commit": false,
+      "auto_offset_reset": "earliest",
+      "group_id": "tributo-app",
+      "client_id": "tributo-client"
+    },
+    "consumer_topics": ["tributosimple-topic-admin", "tributosimple-topic-afip","tributosimple-topic-arba", "tributosimple-topic-agip"],
+    "debug": false,
+    "init_retry_max": 10,
+    "init_retry_delay": 60
+  },
+  "db": {
+        "user": "anfleruser",
+        "password": "passw0rd",
+        "host": "anfler.db",
+        "port": 3306,
+        "database": "anflerdb",
+        "init_retry_max": 10,
+        "init_retry_delay": 10,
+        "pool_recycle": 1800,
+        "pool_size": 2
+  },
+  "pool": {
+    "preffix": "anfler",
+    "max_workers": 5,
+    "wait_timeout_sec": 300,
+    "monitor_interval_sec": 520,
+    "monitor_timeout_sec": 580,
+    "child_process_names": ["chrome", "chromedriver"]
+  },
+  "logging":{
+    "logging_port": 9999
+  }
+}

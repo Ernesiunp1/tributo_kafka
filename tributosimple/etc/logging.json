@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "loggers": {
+    "root": {
+      "handlers": ["console"],
+      "level": "INFO"
+    },
+    "anfler.app": {
+      "propagate": false,
+      "handlers": ["console", "file"],
+      "level": "INFO"
+    },
+    "anfler.app.stat": {
+      "propagate": false,
+      "handlers": ["console", "file_app_stat"],
+      "level": "INFO"
+    },
+    "anfler.kafka": {
+      "propagate": false,
+      "handlers": ["console", "file"],
+      "level": "INFO"
+    },
+    "anfler.db": {
+      "propagate": false,
+      "handlers": ["console", "file"],
+      "level": "INFO"
+    },
+    "sqlalchemy.engine": {
+        "propagate": false,
+        "handlers": ["console", "file"],
+        "level": "WARN"
+      },
+    "anfler.mp": {
+      "propagate": false,
+      "handlers": ["console", "file"],
+      "level": "INFO"
+    },
+    "anfler.mq.dummy": {
+      "propagate": false,
+      "handlers": ["console", "file"],
+      "level": "DEBUG"
+    },
+    "anfler.mp.stat": {
+      "propagate": false,
+      "handlers": ["file_mp_stat"],
+      "level": "INFO"
+    },
+    "anfler.webscrap": {
+      "propagate": false,
+      "handlers": [ "file_scrap"],
+      "level": "INFO"
+    },
+    "kafka": {
+      "propagate": false,
+      "handlers": ["console", "file"],
+      "level": "WARN"
+    }
+  },
+  "formatters": {
+    "basic": {
+      "class": "logging.Formatter",
+      "datefmt":"%Y-%m-%d %H:%M:%S",
+      "format": "%(asctime)s.%(msecs)03d %(levelname)s %(thread)d %(threadName)s %(module)s - %(funcName)s: %(message)s"
+    },
+    "raw": {
+      "class": "logging.Formatter",
+      "format": "%(message)s"
+    }
+  },
+  "handlers": {
+    "console": {
+      "class": "logging.StreamHandler",
+      "formatter": "basic"
+    },
+    "file": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "formatter": "basic",
+      "filename": "{APP_HOME}/logs/tributosimple.log",
+      "backupCount": 10,
+      "maxBytes": 10485760
+    },
+    "file_scrap": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "formatter": "basic",
+      "filename": "{APP_HOME}/logs/tributosimple-scrapping.log",
+      "backupCount": 10,
+      "maxBytes": 10485760
+    },
+    "file_mp_stat": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "formatter": "raw",
+      "filename": "{APP_HOME}/logs/threadpool_stat.log",
+      "backupCount": 10,
+      "maxBytes": 10485760
+    },
+    "file_app_stat": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "formatter": "raw",
+      "filename": "{APP_HOME}/logs/tributosimple_stat.log",
+      "backupCount": 10,
+      "maxBytes": 10485760
+    }
+  }
+}

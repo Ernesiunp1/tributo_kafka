@@ -1,0 +1,65 @@
+FROM python:3.7
+
+# Doc
+LABEL maintener="tributo simple - Api <support@anfler.com>"
+
+# Some extra packages and/or update
+# Included google chrome for scrapping
+RUN apt-get update && apt-get install -y  \
+    net-tools \
+    wget \
+    curl \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgl1-mesa-glx \
+    tesseract-ocr
+RUN python -m pip install --upgrade pip
+RUN pip install opencv-python pytesseract opencv-python-headless numpy imutils
+
+
+
+
+# Build and install python modules
+# #
+ADD utils/ /src/utils/
+ADD kafka/ /src/kafka/
+ADD db/ /src/db/
+ADD api/* /src/api/
+
+RUN cd /src/utils && python setup.py bdist_wheel && pip install dist/*whl && pip list anfler | grep anfler
+RUN cd /src/kafka && python setup.py bdist_wheel && pip install dist/*whl && pip list anfler | grep anfler
+RUN cd /src/db && python setup.py bdist_wheel && pip install dist/*whl && pip list anfler | grep anfler
+RUN cd /src/api && pip install --no-cache-dir -r requirements.txt
+RUN rm -rf /src
+
+
+# Add app
+ADD api/ /api/
+RUN rm -rf /api/etc
+
+
+
+
+# Environment
+ENV APP_HOME=/api
+ENV APP_LOG=${APP_HOME}/logs
+ENV APP_CONFIG_FILE=${APP_HOME}/etc/config.json
+ENV APP_CONFIG_LOG_FILE=${APP_HOME}/etc/logging.json
+ENV APP_HOST=0.0.0.0
+ENV APP_PORT=80
+
+ENV APP_ACCESS_LOG=--access-log  
+# --no-access-log
+
+ENV APP_RELOAD="--reload --reload-dir ${APP_HOME}/app --reload-dir ${APP_HOME}/etc"
+ENV APP_LIFESPAN=on
+
+#ADD run_uvicorn.sh /api/run_uvicorn.sh
+RUN chmod 755 /api/run_uvircorn.sh
+
+#
+# App
+WORKDIR /api
+CMD ["/api/run_uvircorn.sh"]
+

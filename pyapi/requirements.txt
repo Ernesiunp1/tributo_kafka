@@ -1,0 +1,40 @@
+
+# python 3.9.0
+#
+# conda create  --yes --name anfler_afip python=3.9.0
+# conda install --yes --name anfler_afip --file requirements.txt
+# 
+
+#geckodriver-autoinstaller
+
+# anfler-utils==0.0.1
+#anfler-webscrap==0.1.0
+asgiref==3.6.0
+attrs==22.2.0
+chardet==3.0.4
+Django==4.1.5
+django-jsonfield==1.4.1
+djangorestframework==3.14.0
+geckodriver-autoinstaller==0.1.0
+idna==2.10
+iniconfig==2.0.0
+jsonfield==3.1.0
+numpy==1.24.1
+opencv-python==4.7.0.72
+packaging==23.0
+pandas==1.3.4
+peewee==3.15.3
+Pillow==9.4.0
+pluggy==0.13.1
+psutil==5.7.3
+py==1.11.0
+pytesseract==0.3.10
+pytest==6.1.2
+python-dateutil==2.8.2
+pytz==2022.7.1
+requests==2.24.0
+selenium==3.141.0
+six==1.16.0
+sqlparse==0.4.3
+toml==0.10.2
+urllib3==1.25.11

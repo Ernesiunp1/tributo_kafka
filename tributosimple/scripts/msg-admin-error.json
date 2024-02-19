@@ -1,0 +1,11 @@
+{
+    "id": "REGENERATE",
+    "header": {
+        "fn": "app.dummy_service.DummyService@error",
+        "user": "anfler",
+        "wrap_in": "message",
+        "entity": "admin",
+        "service": "error"
+    },
+    "payload": {}
+}

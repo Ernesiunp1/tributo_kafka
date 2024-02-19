@@ -1,0 +1,26 @@
+2021-01-18 12:43:15.537 INFO MainThread anfler_ccma - __init__: INSTANCING CCMA CLASS
+2021-01-18 12:43:15.538 INFO MainThread anfler_baseclass - validate_message: ====================STARTING RUTINE====================
+2021-01-18 12:43:15.538 INFO MainThread anfler_baseclass - validate_message: VALIDATING MESSAGE
+2021-01-18 12:43:15.538 INFO MainThread anfler_baseclass - validate: VALIDATING CUIT AND PWD
+2021-01-18 12:43:15.539 INFO MainThread anfler_baseclass - validate: VALIDATING CUIT AND PWD
+2021-01-18 12:43:15.539 WARNING MainThread decorators - wrap: ==================DECORADOR RANDOM_WAIT EN USO t_s = 3.260689595521522====================
+2021-01-18 12:43:15.539 INFO MainThread anfler_login - run: job= 1234567890 |LOGGING AT URL: https://auth.afip.gob.ar/contribuyente_/login.xhtml
+2021-01-18 12:43:15.539 INFO MainThread anfler_login - run: job= 1234567890 |SETTING OPTIONS OF DRIVER
+2021-01-18 12:43:15.539 INFO MainThread anfler_login - run: job= 1234567890 |====================DRIVER SELECTED: CHROME====================
+2021-01-18 12:54:48.649 INFO MainThread anfler_ccma - __init__: INSTANCING CCMA CLASS
+2021-01-18 12:54:48.650 INFO MainThread anfler_baseclass - validate_message: ====================STARTING RUTINE====================
+2021-01-18 12:54:48.650 INFO MainThread anfler_baseclass - validate_message: VALIDATING MESSAGE
+2021-01-18 12:54:48.651 INFO MainThread anfler_baseclass - validate: VALIDATING CUIT AND PWD
+2021-01-18 12:54:48.651 INFO MainThread anfler_baseclass - validate: VALIDATING CUIT AND PWD
+2021-01-18 12:54:48.651 WARNING MainThread decorators - wrap: ==================DECORADOR RANDOM_WAIT EN USO t_s = 3.4958416418676928====================
+2021-01-18 12:54:48.652 INFO MainThread anfler_login - run: job= 1234567890 |LOGGING AT URL: https://auth.afip.gob.ar/contribuyente_/login.xhtml
+2021-01-18 12:54:48.652 INFO MainThread anfler_login - run: job= 1234567890 |SETTING OPTIONS OF DRIVER
+2021-01-18 12:54:48.652 INFO MainThread anfler_login - run: job= 1234567890 |====================DRIVER SELECTED: CHROME====================
+2021-01-18 12:54:52.585 WARNING MainThread anfler_baseclass - force_find_xpath: job= 1234567890|FORCING SEARCH OF XPATH: /html/body/nav/div/div/div[2]/div/ul/li[1]/a
+2021-01-18 12:54:52.585 WARNING MainThread anfler_baseclass - force_find_xpath: N FOR CRASH: 31
+2021-01-18 12:54:52.586 INFO MainThread anfler_baseclass - find_xpath: job= 1234567890|SEARCHING for xpath /html/body/nav/div/div/div[2]/div/ul/li[1]/a
+2021-01-18 12:54:56.837 INFO MainThread anfler_baseclass - force_find_xpath: FINDED
+2021-01-18 12:54:59.840 INFO MainThread anfler_baseclass - actual_window_2: SEARCHING for new tab 2
+2021-01-18 12:54:59.917 WARNING MainThread anfler_baseclass - force_find_xpath: job= 1234567890|FORCING SEARCH OF XPATH: XPATH_CUIT_AFIP
+2021-01-18 12:54:59.917 WARNING MainThread anfler_baseclass - force_find_xpath: N FOR CRASH: 18
+2021-01-18 12:54:59.917 INFO MainThread anfler_baseclass - find_xpath: job= 1234567890|SEARCHING for xpath XPATH_CUIT_AFIP

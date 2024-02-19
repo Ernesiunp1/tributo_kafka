@@ -1,0 +1,141 @@
+version: "3.5"
+
+services:
+  api:
+    image: "anfler-api"
+    build:
+       context: .      
+       dockerfile: ./Dockerfile.api
+       shm_size: "256mb"
+    container_name: "anfler.api"
+    hostname: "anfler.api"
+    restart: always
+    ports:
+      - '8006:80'    
+    networks:
+      - anfler-network
+    depends_on:
+      - zookeeper1
+      - kafka1
+      - db
+    volumes:
+      # Application log folder
+      - type: bind
+        source: ./tmp/api-logs
+        target: /api/logs 
+      - type: bind
+        source: ./api/etc
+        target: /api/etc         
+  app:
+    image: "anfler-app"
+    build:
+       context: .      
+       dockerfile: ./Dockerfile.app
+    container_name: "anfler.app"
+    hostname: "anfler.app"
+    restart: always
+    networks:
+      - anfler-network
+    depends_on:
+      - zookeeper1
+      - kafka1
+      - db
+    volumes:
+      # Application log folder
+      - type: bind
+        source: ./tmp/app-logs
+        target: /app/logs 
+      - type: bind
+        source: ./tributosimple/etc
+        target: /app/etc         
+    environment:
+      - APP_CONFIG_FILE=${APP_CONFIG_FILE}
+      - KAFKA_CONFIG=${KAFKA_CONFIG}
+      - DB_CONFIG=${DB_CONFIG}
+      - POOL_CONFIG=${POOL_CONFIG}
+  # Kafka images from https://hub.docker.com/r/bitnami/kafka/
+  # See https://www.confluent.io/blog/kafka-listeners-explained/ for details about listener configuration
+  # 
+  zookeeper1:
+    image: 'bitnami/zookeeper:latest'
+    container_name: "anfler.zookeeper1"
+    hostname: "anfler.zookeeper1"
+    restart: always
+    ports:
+      - '12181:2181'
+    networks:
+      - anfler-network
+    volumes:
+      # https://github.com/bitnami/bitnami-docker-kafka#persisting-your-data
+      # NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID 1001.
+      - type: bind
+        source: ./kafka/zookeeper1
+        target: /bitnami/kafka
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true # TBD
+#   TBD
+#    volumes:
+#      - 'zookeeper_data:/bitnami'
+
+  kafka1:
+    image: 'bitnami/kafka:latest'
+    container_name: "anfler.kafka1"
+    hostname: "anfler.kafka1"  # See etc/config.json
+    restart: always
+    ports:
+      - '19092:9092'  # See etc/config.json  (bootstrap_servers)
+    networks:
+      - anfler-network
+    volumes:
+      # https://github.com/bitnami/bitnami-docker-kafka#persisting-your-data
+      # NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID 1001.
+      - type: bind
+        source: ./kafka/kafka1
+        target: /bitnami/kafka
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=anfler.zookeeper1:2181
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_PROTOCOL=PLAINTEXT
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENERS=INTERNAL://0.0.0.0:29092,EXTERNAL://0.0.0.0:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_ADVERTISED_LISTENERS=INTERNAL://anfler.kafka1:29092,EXTERNAL://localhost:9092
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INTERNAL
+    depends_on:
+      - zookeeper1
+#   TBD
+#    volumes:
+#      - 'kafka_data:/bitnami'
+  db:
+    build:
+       context: .       
+       dockerfile: ./Dockerfile.db
+    image: "anfler-db"
+    container_name: "anfler.db"
+    hostname: "anfler.db" # See etc/config.json
+    restart: always
+    ports:
+      - '3306:3306'
+      - '33060:33060'
+    networks:
+      - anfler-network
+    environment:  # See etc/config.json (db)
+      MYSQL_DATABASE: 'anflerdb'
+      MYSQL_ROOT_PASSWORD: 'passw0rd'
+      MYSQL_HOST: 'anfler.db'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_USER: 'anfleruser'
+      MYSQL_PASSWORD: 'passw0rd'
+
+networks:
+  anfler-network:
+    driver: bridge
+
+#   TBD
+#volumes:
+#  zookeeper_data:
+#    driver: local
+#  kafka_data:
+#    driver: local
+

@@ -1,0 +1,9 @@
+
+# python 3.9.0
+#
+# conda create  --yes --name afip python=3.9.0
+# conda install --yes --name afip --file requirements.txt
+# 
+
+psutil==5.7.3
+anfler-utils

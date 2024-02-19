@@ -1,0 +1,15 @@
+FROM mysql:latest
+
+# Some extra packages and/or update
+#RUN apt-get update && apt-get install -y  \
+#    vim  \
+#    net-tools \
+#    gcc
+#RUN apk update && apk add vim net-tools gcc
+
+# Doc
+LABEL maintener="tributo simple - MySql <support@anfler.com>"
+
+# Database setup
+ADD tributosimple/scripts/db/*.sql /docker-entrypoint-initdb.d/
+

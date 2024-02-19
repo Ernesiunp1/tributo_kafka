@@ -1,0 +1,279 @@
+{
+  "scrapper": {
+    "decorar": true,
+    "time_random_min": 0.5,
+    "time_random_max": 1,
+    "t_o": 60,
+    "t_s": 2,
+    "afip": {
+      "ccma": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "run": {
+          "t_s": 0.8,
+          "headless": true,
+          "t_o": 60
+        }
+      },
+      "constancia_inscripcion": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "get_image": {
+          "t_s": 0.8,
+          "headless": true,
+          "t_o": 30
+        },
+        "get_activity": {
+          "t_s": 0.8,
+          "headless": true,
+          "t_o": 30
+        },
+        "get_address": {
+          "t_s": 0.8,
+          "headless": true,
+          "t_o": 30
+        },
+        "get_category": {
+          "t_s": 0.8,
+          "headless": true,
+          "t_o": 30
+        }
+      },
+      "comprobantes": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "get_sales": {
+          "t_s": 0.8,
+          "headless": true,
+          "t_o": 30
+        },
+        "get_purchases": {
+          "t_s": 2,
+          "headless": true,
+          "t_o": 30
+        }
+      },
+      "mis_comprobantes": {
+        "browser": "chrome",
+        "t_s": 2,
+        "headless": true,
+        "options": true,
+        "get_sales": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        },
+        "get_purchases": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 30
+        }
+      },
+      "AltaMonotributo": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true
+      },
+      "SifereConsultas": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "get_jurisdiccion": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        }
+      },
+      "Sifereddjj": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "vepcm03": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        },
+        "descarga_cm03": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        },
+        "descarga_cm05": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        },
+        "saldo_favor": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        },
+        "coeficientes_unificados_cm05": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        },
+        "ddjj": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        }
+      },
+      "recategorizacion": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "run": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        }
+      },
+      "modificacion": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "modificar": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        },
+        "baja": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        },
+        "alta": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        }
+      },
+      "vep": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "mensual": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        },
+        "total": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 60
+        }
+      },
+      "validate_pwd": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "run": {
+          "t_s": 1,
+          "t_o": 60
+        }
+      }
+    },
+    "arba": {
+      "ccma": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "resume": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 30
+        },
+        "positive_balance": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 30
+        },
+        "vep": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 30
+        }
+    },
+      "iibb": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "run": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 30
+        },
+        "liquidacion_mensual": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 30
+        },
+        "descargar_retenc_percep": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 30
+        },
+        "presentacion": {
+          "t_s": 1,
+          "headless": true,
+          "t_o": 30
+        }
+    }
+    },
+    "agip": {
+      "arciba": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "retenciones_percepciones": {
+          "t_s": 0.8,
+          "headless": true,
+          "t_o": 60
+        }
+      },
+      "esicol": {
+        "browser": "chrome",
+        "t_s": 1,
+        "headless": true,
+        "options": true,
+        "saldo_favor": {
+          "t_s": 0.8,
+          "headless": true,
+          "t_o": 60
+        },
+        "descarga_ddjj": {
+          "t_s": 0.8,
+          "headless": true,
+          "t_o": 60
+        },
+        "vep": {
+          "t_s": 0.8,
+          "headless": true,
+          "t_o": 60
+        },
+        "deuda": {
+          "t_s": 0.8,
+          "headless": true,
+          "t_o": 60
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "scrapper_global": {
+    "time_random_max": 20,
+    "time_random_min": 10
+  },
+  "PATH": {
+    "base": {
+      "DOWNLOADS_PATH": "/tmp/",
+      "ROOT": "/app"
+    },
+    "afip": {
+      "DOWNLOADS_PATH": "/tmp/",
+      "ROOT": "/app",
+      "CHROMEDRIVER_PATH": "/usr/local/bin/chromedriver",
+      "FIREFOX_PATH": "/usr/local/bin/geckodriver"
+    },
+    "arba": {
+      "DOWNLOADS_PATH": "/tmp/",
+      "ROOT": "/app",
+      "CHROMEDRIVER_PATH": "/usr/local/bin/chromedriver",
+      "FIREFOX_PATH": "/usr/local/bin/geckodriver"
+    },
+    "agip": {
+      "DOWNLOADS_PATH": "/tmp/",
+      "ROOT": "/app",
+      "CHROMEDRIVER_PATH": "/usr/local/bin/chromedriver",
+      "FIREFOX_PATH": "/usr/local/bin/geckodriver"
+    }
+  }
+}
+

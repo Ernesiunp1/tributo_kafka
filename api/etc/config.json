@@ -1,0 +1,35 @@
+{
+  "kafka": {
+    "producer": {
+      "bootstrap_servers": ["anfler.kafka1:29092"],
+      "client_id": "tributo-client-producer",
+      "value_serializer":"lambda x: json.dumps(x).encode('utf-8')"
+    },
+    "producer_topics": ["tributosimple-topic-admin", "tributosimple-topic-afip","tributosimple-topic-arba", "tributosimple-topic-agip"],
+    "debug": false,
+    "init_retry_max": 10,
+    "init_retry_delay": 60
+  },
+  "db": {
+        "user": "anfleruser",
+        "password": "passw0rd",
+        "host": "anfler.db",
+        "port": 3306,
+        "database": "anflerdb",
+        "init_retry_max": 10,
+        "init_retry_delay": 10,
+        "pool_recycle": 1800,
+        "pool_size": 2
+  },
+  "logging":{
+    "logging_port": 9999
+  },
+  "jwt": {
+        "PRIVATE_KEY":"",
+        "PRIVATE_KEY_FILE":"/api/etc/private.pem.txt",
+        "PRIVATE_PASS": "dusEZzcDqhSAIJeY",
+        "PUBLIC_KEY_FILE": "/api/etc/public.pem.txt",
+        "ALGORITHM": "RS256",
+        "ACCESS_TOKEN_EXPIRE_MINUTES": 30
+    }
+}

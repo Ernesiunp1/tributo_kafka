@@ -1,0 +1,24 @@
+
+# python 3.9.0
+#
+# conda create  --yes --name afip python=3.9.0
+# conda install --yes --name afip --file requirements.txt
+# 
+
+#selenium==3.141.0
+#geckodriver==0.28.0
+#pytest==6.1.2
+#requests==2.24.0
+#matplotlib==3.3.2
+#pillow==8.0.1
+#psutil==5.7.3
+
+#fastapi==0.62.0
+#uvicorn==0.12.3
+#pydantic==1.7.2
+
+anfler-utils
+anfler-kafka
+anfler-threadpool
+anfler-db
+anfler-webscrap

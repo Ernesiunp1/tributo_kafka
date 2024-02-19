@@ -1,0 +1,13 @@
+{
+  "db": {
+        "user": "anfleruser",
+        "password": "passw0rd",
+        "host": "anfler.db",
+        "port": 3306,
+        "database": "anflerdb",
+        "init_retry_max": 30,
+        "init_retry_delay": 2,
+        "pool_recycle": 1800,
+        "pool_size": 10
+    }
+}

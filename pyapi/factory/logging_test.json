@@ -1,0 +1,49 @@
+{
+  "version": 1,
+    "loggers": {
+      "root": {
+        "handlers": [
+          "console"
+        ],
+        "level": "WARNING"
+      },
+      "anfler.webscrap.dev": {
+        "propagate": false,
+        "handlers": [
+          "console", "file_scrapping"
+        ],
+        "level": "DEBUG"
+      },
+      "anfler.webscrap.prod": {
+        "propagate": false,
+        "handlers": [
+          "file_scrapping", "console"
+        ],
+        "level": "DEBUG"
+      }
+    },
+    "formatters": {
+      "basic": {
+        "class": "logging.Formatter",
+        "datefmt": "%Y-%m-%d %H:%M:%S",
+        "format": "%(asctime)s.%(msecs)03d %(levelname)s %(threadName)s %(module)s - %(funcName)s: %(message)s"
+      },
+      "raw": {
+        "class": "logging.Formatter",
+        "format": "%(message)s"
+      }
+    },
+    "handlers": {
+      "console": {
+        "class": "logging.StreamHandler",
+        "formatter": "basic"
+      },
+      "file_scrapping": {
+        "class": "logging.handlers.RotatingFileHandler",
+        "formatter": "basic",
+        "filename": "web_scrapping.log",
+        "backupCount": 10,
+        "maxBytes": 1048576
+      }
+    }
+}

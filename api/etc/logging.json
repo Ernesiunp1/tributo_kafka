@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "loggers": {
+    "root": {
+      "handlers": ["console"],
+      "level": "INFO"
+    },
+    "anfler.api": {
+      "propagate": false,
+      "handlers": ["file"],
+      "level": "INFO"
+    },
+    "anfler.api.deps": {
+      "propagate": false,
+      "handlers": ["file"],
+      "level": "INFO"
+    },
+    "anfler.api.jobs": {
+      "propagate": false,
+      "handlers": [ "file"],
+      "level": "INFO"
+    },
+    "anfler.api.admin": {
+      "propagate": false,
+      "handlers": [ "file"],
+      "level": "INFO"
+    },
+    "anfler.api.default": {
+      "propagate": false,
+      "handlers": [ "file"],
+      "level": "INFO"
+    },
+    "anfler.api.security": {
+      "propagate": false,
+      "handlers": [ "file"],
+      "level": "INFO"
+    },
+    "anfler.util.jwt": {
+      "propagate": false,
+      "handlers": ["console", "file"],
+      "level": "ERROR"
+    },
+    "anfler.kafka": {
+      "propagate": false,
+      "handlers": ["file"],
+      "level": "INFO"
+    },
+    "anfler.db": {
+      "propagate": false,
+      "handlers": [ "file"],
+      "level": "INFO"
+    },
+    "sqlalchemy.engine": {
+        "propagate": false,
+        "handlers": ["file"],
+        "level": "WARN"
+    },
+    "kafka": {
+      "propagate": false,
+      "handlers": ["file"],
+      "level": "WARN"
+    },
+    "uvicorn": {
+      "propagate": false,
+      "handlers": ["file_uvicorn"],
+      "level": "WARN"
+    }
+  },
+  "formatters": {
+    "basic": {
+      "class": "logging.Formatter",
+      "datefmt":"%Y-%m-%d %H:%M:%S",
+      "format": "%(asctime)s.%(msecs)03d %(levelname)s %(thread)d %(threadName)s %(module)s - %(funcName)s: %(message)s"
+    },
+    "raw": {
+      "class": "logging.Formatter",
+      "format": "%(message)s"
+    }
+  },
+  "handlers": {
+    "console": {
+      "class": "logging.StreamHandler",
+      "formatter": "basic"
+    },
+    "file": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "formatter": "basic",
+      "filename": "{APP_HOME}/logs/tributosimple-api.log",
+      "backupCount": 10,
+      "maxBytes": 10485760
+    },
+    "file_uvicorn": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "formatter": "raw",
+      "filename": "{APP_HOME}/logs/tributosimple-uvicorn.log",
+      "backupCount": 10,
+      "maxBytes": 1048576
+    }
+  }
+}

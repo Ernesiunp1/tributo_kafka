@@ -1,0 +1,22 @@
+# Usamos la imagen oficial de PHPMyAdmin desde Docker Hub
+FROM phpmyadmin:apache
+
+
+ENV PMA_HOST=172.18.0.5 \
+    PMA_PORT=3306 \
+    PMA_USER=anfleruser \
+    PMA_PASSWORD=passw0rd
+
+
+ENV PMA_LANG=es
+
+# Opcional: si necesitas personalizar la configuración de PHPMyAdmin
+# COPY config.user.inc.php /etc/phpmyadmin/config.user.inc.php
+
+
+docker container run \
+-d \
+--name phpmyadmin \
+-e PMA_ARBITRARY=1 \
+-p  8080:80 \
+phpmyadmin:apache

@@ -1,0 +1,94 @@
+FROM python:3.9-slim
+
+# Doc
+LABEL maintener="tributo simple - App <support@anfler.com>"
+
+
+# Some extra packages and/or update
+# Included google chrome for scrapping
+RUN apt-get update && apt-get install -y  \
+    vim  \
+    net-tools \
+    procps \
+    gcc \
+    wget \
+    gnupg2 \
+    curl \
+    unzip
+
+RUN python -m pip install --upgrade pip
+
+
+# START ADDED FOR SCRAPPING
+# install google chrome
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+RUN apt-get update && apt-get install -y google-chrome-stable
+
+# install chromedriver
+RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
+RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/ && rm /tmp/chromedriver.zip
+
+# set display port to avoid crash
+ENV DISPLAY=:99
+
+# change level openssl 2 for 1
+RUN sed -i.bak  's/CipherString = DEFAULT@SECLEVEL=2/CipherString = DEFAULT@SECLEVEL=1/g' /etc/ssl/openssl.cnf
+RUN google-chrome --headless --no-sandbox
+# END ADDED FOR SCRAPPING
+
+#
+# Build and install python modules
+#
+ADD utils/ /src/utils/
+ADD kafka/ /src/kafka/
+ADD threadpool/ /src/threadpool/
+ADD db/ /src/db/
+ADD pyapi/ /src/pyapi/
+ADD tributosimple/ /src/tributosimple/
+
+RUN cd /src/utils && python setup.py bdist_wheel && pip install dist/*whl && pip list anfler | grep anfler
+RUN cd /src/kafka && python setup.py bdist_wheel && pip install dist/*whl && pip list anfler | grep anfler
+RUN cd /src/threadpool && python setup.py bdist_wheel && pip install dist/*whl && pip list anfler | grep anfler
+RUN cd /src/db && python setup.py bdist_wheel && pip install dist/*whl && pip list anfler | grep anfler
+RUN cd /src/pyapi && python setup.py bdist_wheel && pip install dist/*whl && pip list anfler | grep anfler
+RUN cd /src/tributosimple && python setup.py bdist_wheel && pip install dist/*whl && pip list anfler | grep anfler
+RUN rm -rf /src
+
+
+#
+# App
+WORKDIR /app
+
+# Scripts (aux) and configuration files
+ADD tributosimple/scripts/* /app/scripts/
+ADD tributosimple/etc/* /app/etc/
+ADD tributosimple/logs /app/logs
+ADD pyapi/etc/*.json /app/etc/
+
+
+# Environment
+ENV APP_HOME=/app
+ENV APP_LOG=${APP_HOME}/logs
+
+# These variables allows to override sections from /app/etc/config.json
+# For example, to override "pool" section:
+# 1- Create a file with the definition:
+#   jq -r "{pool:.pool}" /app/etc/config.json > pool.json
+# 2- Edit definition in pool.json
+# 3- Override using POOL_CONFIG when container start
+#    -e POOL_CONFIG=`cat pool.json`
+#
+ENV KAFKA_CONFIG=
+ENV DB_CONFIG=
+ENV POOL_CONFIG=
+
+# ENV AFIP_CONFIG=
+# ENV ARBA_CONFIG=
+# ENV AGIP_CONFIG=
+
+
+#CMD ["python3", "-m","app.tributosimple", "-c", "/app/etc/config.json", "-l", "/app/etc/logging.json"]
+RUN chmod 755 /app/scripts/tributosimple.sh
+CMD ["/app/scripts/tributosimple.sh", "start", "out"]
+

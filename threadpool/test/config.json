@@ -1,0 +1,9 @@
+{
+  "pool": {
+    "preffix": "anfler",
+    "max_workers": 5,
+    "wait_timeout_sec": 5,
+    "monitor_interval_sec": 10,
+    "monitor_timeout_sec": 15
+  }
+}
